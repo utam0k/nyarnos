@@ -1,3 +1,0 @@
-[target.i386-unknown-none]
-    linker = "ld.lld-6.0"
-    ar = "llvm-ar-6.0"
