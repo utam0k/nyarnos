@@ -24,7 +24,7 @@ login:
 qemu:
 	qemu-system-i386 -serial mon:stdio build/img/nyarn.img
 
-run: docker qemu
+run: docker_build qemu
 
 clean:
 	rm -r build/
