@@ -48,9 +48,8 @@ jobs:
     - name: "Build docker image"
       run: make image
 
-    - name: "Run test"
+    - name: "Run docker test"
       run: make docker_test
-      if: runner.os == 'Linux'
 
   # check_formatting:
   #   name: "Check Formatting"
