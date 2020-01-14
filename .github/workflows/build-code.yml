@@ -12,7 +12,7 @@ jobs:
       matrix:
         platform: [
           ubuntu-latest,
-          macos-latest,
+          # TODO: macos-latest,
         ]
 
     runs-on: ${{ matrix.platform }}
@@ -25,25 +25,10 @@ jobs:
     # install tools
     - name: Install tools (Linux)
       run: sudo apt update && sudo apt install make
-      if: runner.os == 'Linux'
-    - name: Install tools (macOS)
-      run: brew install make binutils
-      if: runner.os == 'macOS'
-      env:
-        HOMEBREW_NO_AUTO_UPDATE: 1
-        HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: 1
-        HOMEBREW_NO_INSTALL_CLEANUP: 1
 
     # install docker
     - name: Install docker (Linux)
       run: sudo apt update && sudo apt install docker
-      if: runner.os == 'Linux'
-
-    - name: Install Rustup
-      run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
-        echo ::add-path::$HOME/.cargo/bin
-      if: runner.os == 'macOS'
 
     - name: "Print Rust Version"
       run: |
@@ -57,28 +42,15 @@ jobs:
      # install QEMU
     - name: Install QEMU (Linux)
       run: sudo apt update && sudo apt install qemu-system-x86
-      if: runner.os == 'Linux'
-    - name: Install QEMU (macOS)
-      run: brew install qemu
-      if: runner.os == 'macOS'
-      env:
-        HOMEBREW_NO_AUTO_UPDATE: 1
-        HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK: 1
-        HOMEBREW_NO_INSTALL_CLEANUP: 1
     - name: "Print QEMU Version"
       run: qemu-system-i386 --version
 
     - name: "Build docker image"
       run: make image
-      if: runner.os == 'Linux'
 
     - name: "Run test"
       run: make docker_test
       if: runner.os == 'Linux'
-
-    - name: "Run test"
-      run: make test
-      if: runner.os == 'macOS'
 
   # check_formatting:
   #   name: "Check Formatting"
