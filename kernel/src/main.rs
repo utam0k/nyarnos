@@ -11,6 +11,13 @@ use core::panic::PanicInfo;
 use kernel::print;
 use kernel::println;
 
+#[test_case]
+fn trivial_assertion() {
+    print!("trivial assertion... ");
+    assert_eq!(1, 1);
+    println!("[ok]");
+}
+
 #[no_mangle]
 pub extern "C" fn main() {
     let vga_buffer = 0xb8000 as *mut u8;
