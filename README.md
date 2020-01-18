@@ -22,3 +22,4 @@ $ make run
 - [xv6](https://github.com/mit-pdos/xv6-public)
 - [Writing an OS in Rust](https://os.phil-opp.com/)
 - [OSDev.org](https://wiki.osdev.org/Main_Page)
+- [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)
