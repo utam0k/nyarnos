@@ -1,0 +1,9 @@
+[package]
+name = "xtask"
+version = "0.1.0"
+authors = ["utam0k <k0ma@utam0k.jp>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1.0.19"
+pico-args = "0.3.0"
