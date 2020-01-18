@@ -1,2 +1,3 @@
 [workspace]
 members = [ "xtask", "kernel" ]
+exclude = [ "bootloader" ]
