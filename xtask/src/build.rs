@@ -74,6 +74,11 @@ fn is_kernel_bin(entry: &fs::DirEntry) -> bool {
 }
 
 fn build_for_test() -> Result<()> {
+    run(
+        format!("cargo xbuild --target ../{}.json --tests", TARGET).as_str(),
+        "kernel",
+    )?;
+
     let mut entries = fs::read_dir(format!("target/{}/debug", TARGET))?
         .filter(|res| res.as_ref().map(|e| is_kernel_bin(e)).unwrap_or(false))
         .collect::<Result<Vec<_>, io::Error>>()?;
