@@ -9,7 +9,7 @@ use std::{
     process::{Command, Output, Stdio},
 };
 
-pub use crate::build::build_run;
+pub use crate::build::{build_run, test_build_run};
 
 pub fn project_root() -> PathBuf {
     Path::new(

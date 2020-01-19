@@ -2,7 +2,7 @@
 //! `.cargo/config`.
 
 use pico_args::Arguments;
-use xtask::{build_run, Result};
+use xtask::{build_run, test_build_run, Result};
 
 fn main() -> Result<()> {
     let mut args = Arguments::from_env();
@@ -11,11 +11,12 @@ fn main() -> Result<()> {
     match subcommand.as_str() {
         "build" => {
             args.finish()?;
-            build_run();
+            build_run()?;
             Ok(())
         }
         "test" => {
             args.finish()?;
+            test_build_run()?;
             Ok(())
         }
         _ => {
