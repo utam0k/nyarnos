@@ -13,13 +13,7 @@ build:
 	dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc
 
 test_build:
-	mkdir -p build/obj
-	mkdir -p build/img
-	make -C bootloader build
-	make -C kernel test
-	dd if=/dev/zero of=build/img/nyarn.img count=10000
-	dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc
-	dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc
+	cargo xtask test
 
 test: test_build qemu_nox
 
