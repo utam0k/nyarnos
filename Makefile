@@ -4,13 +4,7 @@ CURRENT := $(shell pwd)
 
 .PHONY: build
 build:
-	mkdir -p build/obj
-	mkdir -p build/img
-	make -C bootloader build
-	make -C kernel build
-	dd if=/dev/zero of=build/img/nyarn.img count=10000
-	dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc
-	dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc
+	cargo xtask build
 
 test_build:
 	cargo xtask test
