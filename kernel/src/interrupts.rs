@@ -17,6 +17,7 @@ fn test_breakpoint_exception() {
     }
 
     println!("test_breakpoint_exception...");
+    println!("invoke a breakpoint exception!(int3)");
     unsafe {
         int3();
     }

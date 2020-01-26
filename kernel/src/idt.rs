@@ -22,6 +22,7 @@ lazy_static! {
     };
 }
 
+// ref. https://wiki.osdev.org/Interrupt_Descriptor_Table
 #[allow(missing_debug_implementations)]
 #[derive(Clone)]
 #[repr(C)]
