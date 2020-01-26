@@ -1,6 +1,9 @@
 #![no_std]
 #![cfg_attr(test, no_main)]
 #![feature(custom_test_frameworks)]
+#![feature(const_fn)]
+#![feature(const_if_match)]
+#![feature(abi_x86_interrupt)]
 #![feature(global_asm)]
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
@@ -9,6 +12,8 @@
 use core::panic::PanicInfo;
 
 pub mod console;
+pub mod idt;
+mod interrupts;
 pub mod uart;
 
 pub fn test_runner(tests: &[&dyn Fn()]) {
@@ -76,6 +81,7 @@ global_asm!(include_str!("entry.S"));
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn main() -> ! {
+    idt::init();
     test_main();
     loop {}
 }

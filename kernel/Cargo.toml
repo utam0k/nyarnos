@@ -6,7 +6,13 @@ edition = "2018"
 
 [dependencies]
 spin = "0.5.2"
+bit_field = "0.9.0"
+bitflags = "1.0.4"
 
 [dependencies.lazy_static]
 version = "1.0"
 features = ["spin_no_std"]
+
+[dependencies.cast]
+version = "0.2.2"
+default-features = false

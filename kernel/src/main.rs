@@ -1,5 +1,6 @@
 #![no_std]
 #![no_main]
+#![feature(asm)]
 #![feature(global_asm)]
 #![feature(lang_items)]
 #![feature(custom_test_frameworks)]
@@ -8,15 +9,9 @@
 
 use core::panic::PanicInfo;
 
+use kernel::idt;
 use kernel::print;
 use kernel::println;
-
-#[test_case]
-fn trivial_assertion() {
-    print!("trivial assertion... ");
-    assert_eq!(1, 1);
-    println!("[ok]");
-}
 
 #[no_mangle]
 pub extern "C" fn main() {
@@ -27,7 +22,10 @@ pub extern "C" fn main() {
             *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
         }
     }
+
     println!("Hello, world!");
+    idt::init();
+
     println!("Yattane");
 
     #[cfg(test)]
