@@ -8,14 +8,8 @@ pub fn build_run() -> Result<()> {
     prepare()?;
     build_kernel()?;
     run("dd if=/dev/zero of=build/img/nyarn.img count=10000", ".")?;
-    run(
-        "dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc",
-        ".",
-    )?;
-    run(
-        "dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc",
-        ".",
-    )?;
+    run("dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc", ".")?;
+    run("dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc", ".")?;
     Ok(())
 }
 
@@ -23,14 +17,8 @@ pub fn test_build_run() -> Result<()> {
     prepare()?;
     build_for_test()?;
     run("dd if=/dev/zero of=build/img/nyarn.img count=10000", ".")?;
-    run(
-        "dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc",
-        ".",
-    )?;
-    run(
-        "dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc",
-        ".",
-    )?;
+    run("dd if=build/obj/bootloader of=build/img/nyarn.img conv=notrunc", ".")?;
+    run("dd if=build/obj/kernel of=build/img/nyarn.img seek=1 conv=notrunc", ".")?;
     Ok(())
 }
 
@@ -54,12 +42,9 @@ fn build_bootloader() -> Result<()> {
 }
 
 fn build_kernel() -> Result<()> {
+    run(format!("cargo xbuild --target ../{}.json", TARGET).as_str(), "kernel")?;
     run(
-        format!("cargo xbuild --target ../{}.json --release", TARGET).as_str(),
-        "kernel",
-    )?;
-    run(
-        format!("cp target/{}/release/kernel build/obj/kernel", TARGET).as_str(),
+        format!("cp target/{}/debug/kernel build/obj/kernel", TARGET).as_str(),
         ".",
     )?;
     Ok(())
