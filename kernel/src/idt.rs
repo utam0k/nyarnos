@@ -1,4 +1,4 @@
-use crate::interrupts::breakpoint_handler;
+use crate::interrupts::{breakpoint_handler, double_fault_handler};
 
 mod entry;
 pub mod handler;
@@ -18,6 +18,7 @@ lazy_static! {
     static ref IDT: InterruptDescriptorTable = {
         let mut idt = InterruptDescriptorTable::new();
         idt.breakpoint.set_handler_fn(breakpoint_handler);
+        idt.double_fault.set_handler_fn(double_fault_handler);
         idt
     };
 }
